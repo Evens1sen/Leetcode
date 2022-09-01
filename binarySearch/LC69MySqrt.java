@@ -11,15 +11,16 @@ public class LC69MySqrt {
         int right = x;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            long square = (long) mid * mid; // Be careful about overflow
-            if (square < x) {
-                left = mid + 1;
-            } else if (square > x) {
+            long square = (long) mid * mid;
+            if (square > x) {
                 right = mid - 1;
-            } else {
+            } else if (square < x) {
+                left = mid + 1;
+            }else {
                 return mid;
             }
         }
+
         return left - 1;
     }
 }
