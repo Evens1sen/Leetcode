@@ -5,21 +5,25 @@ import java.util.Arrays;
 public class LC75SortColors {
 
     public static void main(String[] args) {
-        int[] nums = {1, 2, 0};
+        int[] nums = {2, 0, 1};
         sortColors(nums);
         System.out.println(Arrays.toString(nums));
     }
 
     public static void sortColors(int[] nums) {
-        int zeros = 0;
-        int twos = nums.length - 1;
-        for (int i = 0; i <= twos; i++) {
-            while (nums[i] == 2 && i <= twos) {
-                swap(nums, i, twos--);
-            }
-
+        int zero = 0;
+        int two = nums.length - 1;
+        int i = 0;
+        while (i <= two) {
             if (nums[i] == 0) {
-                swap(nums, i, zeros++);
+                swap(nums, i, zero);
+                zero++;
+                i++;
+            } else if (nums[i] == 2) {
+                swap(nums, i, two);
+                two--;
+            } else {
+                i++;
             }
         }
     }

@@ -16,8 +16,8 @@ public class LC215FindKthLargest {
     }
 
     // A in-place implementation for quickSort
-    public static void quickSort(int[] arr, int left, int right){
-        if (left >= right){
+    public static void quickSort(int[] arr, int left, int right) {
+        if (left >= right) {
             return;
         }
 
@@ -35,6 +35,25 @@ public class LC215FindKthLargest {
         } else {
             return quickSelect(arr, left, partitionIndex - 1, index);
         }
+    }
+
+    // The iterative version for the quick select
+    // Idea is similar to binary search
+    public static int quickSelect(int[] arr, int index) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int partitionIndex = partition(arr, left, right);
+            if (partitionIndex < index) {
+                left = partitionIndex + 1;
+            } else if (partitionIndex > index) {
+                right = partitionIndex - 1;
+            } else {
+                break;
+            }
+        }
+
+        return arr[index];
     }
 
     public static int randomPartition(int[] arr, int left, int right) {

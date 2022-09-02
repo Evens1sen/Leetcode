@@ -6,17 +6,21 @@ import java.util.List;
 
 public class LC347TopKFrequent {
 
-    // A bucket sort implementation
     public int[] topKFrequent(int[] nums, int k) {
+        return topKFrequentBucket(nums, k);
+    }
+
+    // A bucket sort implementation
+    public int[] topKFrequentBucket(int[] nums, int k) {
         HashMap<Integer, Integer> freqMap = new HashMap<>();
         for (int i : nums) {
             freqMap.put(i, freqMap.getOrDefault(i, 0) + 1);
         }
 
-        List<Integer>[] buckets = new List[nums.length + 1];
+        List[] buckets = new List[nums.length + 1];
         for (Integer key : freqMap.keySet()) {
             int frequency = freqMap.get(key);
-            if (buckets[frequency] == null){
+            if (buckets[frequency] == null) {
                 buckets[frequency] = new LinkedList<>();
             }
             buckets[frequency].add(key);
@@ -24,7 +28,7 @@ public class LC347TopKFrequent {
 
         List<Integer> topK = new LinkedList<>();
         for (int i = buckets.length - 1; i >= 0 && topK.size() < k; i--) {
-            if (buckets[i] == null){
+            if (buckets[i] == null) {
                 continue;
             }
 
@@ -43,5 +47,6 @@ public class LC347TopKFrequent {
 
         return result;
     }
+
 
 }
