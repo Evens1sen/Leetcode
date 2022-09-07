@@ -12,4 +12,13 @@ public class ListNode {
         this.val = val;
         this.next = next;
     }
+
+    public void printList() {
+        ListNode cur = this;
+        while (cur.next != null) {
+            System.out.print(cur.val + "->");
+            cur = cur.next;
+        }
+        System.out.println(cur.val);
+    }
 }
