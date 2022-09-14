@@ -2,12 +2,12 @@ package sorting;
 
 import java.util.PriorityQueue;
 
-public class LC295MedianFinder {
+public class MedianFinder {
 
     PriorityQueue<Integer> maxHeap;
     PriorityQueue<Integer> minHeap;
 
-    public LC295MedianFinder() {
+    public MedianFinder() {
         maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
         minHeap = new PriorityQueue<>((o1, o2) -> o1 - o2);
     }
