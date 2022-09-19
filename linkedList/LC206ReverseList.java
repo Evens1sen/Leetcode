@@ -13,7 +13,7 @@ public class LC206ReverseList {
         return iterativeReverse(head);
     }
 
-    public static ListNode recursiveReverse(ListNode head) {
+    private static ListNode recursiveReverse(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -25,7 +25,7 @@ public class LC206ReverseList {
         return newHead;
     }
 
-    public static ListNode iterativeReverse(ListNode head) {
+    private static ListNode iterativeReverse(ListNode head) {
         ListNode pre = null;
         ListNode cur = head;
         while (cur != null) {
