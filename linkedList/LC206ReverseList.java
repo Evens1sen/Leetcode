@@ -34,6 +34,7 @@ public class LC206ReverseList {
             pre = cur;
             cur = next;
         }
+
         return pre;
     }
 }
