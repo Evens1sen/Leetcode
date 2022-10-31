@@ -1,7 +1,5 @@
 package linkedList;
 
-import java.util.List;
-
 public class LC24SwapPairs {
 
     public static void main(String[] args) {
@@ -20,10 +18,11 @@ public class LC24SwapPairs {
         dummy.next = head;
         ListNode pre = dummy;
         while (pre.next != null && pre.next.next != null) {
-            ListNode l1 = pre.next, l2 = pre.next.next;
+            ListNode l1 = pre.next;
+            ListNode l2 = pre.next.next;
+            pre.next = l2;
             l1.next = l2.next;
             l2.next = l1;
-            pre.next = l2;
             pre = l1;
         }
         return dummy.next;
