@@ -11,9 +11,9 @@ public class LC328OddEvenList {
         ListNode even = head.next;
         ListNode evenHead = head.next;
         while (even != null && even.next != null) {
-            odd.next = odd.next.next; // even.next?
+            odd.next = even.next;
             odd = odd.next;
-            even.next = even.next.next;
+            even.next = odd.next;
             even = even.next;
         }
 
