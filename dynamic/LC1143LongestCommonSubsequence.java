@@ -1,4 +1,4 @@
-package dynamicProgramming;
+package dynamic;
 
 public class LC1143LongestCommonSubsequence {
 

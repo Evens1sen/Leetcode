@@ -1,4 +1,4 @@
-package binarySearch;
+package binary;
 
 public class LC69MySqrt {
     public static void main(String[] args) {

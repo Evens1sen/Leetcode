@@ -1,4 +1,4 @@
-package binarySearch;
+package binary;
 
 public class LC540SingleNonDuplicate {
     public static void main(String[] args) {
