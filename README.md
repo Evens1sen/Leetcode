@@ -1,7 +1,10 @@
 # Leetcode
 A recommended practice list is leetcode blind 75: https://leetcode.com/discuss/general-discussion/460599/blind-75-leetcode-questions 
 
-刷算法，找厂上班
+9.1 刷算法，找厂上班
 
-有点破防，蚌埠住了
+9.30 有点破防，蚌埠住了
+
+2.1 摆了两个月，学一阵
+
 ![啊晴可爱喵](https://github.com/Evens1sen/Leetcode/blob/master/keqing.png)
