@@ -8,16 +8,19 @@ public class LC26RemoveDuplicate {
             return 0;
         }
 
-        int slow = 0;
-        int fast = 0;
-        while (fast < nums.length) {
-            if (nums[fast] != nums[slow]) {
-                slow++;
-                nums[slow] = nums[fast];
+        int i = 0;
+        int j = 0;
+        // Considering the iteration variable
+        // Since i is unknown, using j
+        // Update i in certain condition
+        while (j < nums.length) {
+            if (nums[j] != nums[i]) {
+                i++;
+                nums[i] = nums[j];
             }
-            fast++;
+            j++;
         }
 
-        return slow + 1;
+        return i + 1;
     }
 }

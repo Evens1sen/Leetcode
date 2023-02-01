@@ -24,12 +24,14 @@ public class LC128LongestConsecutive {
 
         int maxSize = 1;
         for (int num : hashSet) {
+            // Determine whether this is a consecutive sequence
+            // Reduce the time complexity from O(n^2) to O(n)
             if (!hashSet.contains(num - 1)) {
-                int y = num + 1;
-                while (hashSet.contains(y)) {
-                    y++;
+                int j = num + 1;
+                while (hashSet.contains(j)) {
+                    j++;
                 }
-                maxSize = Math.max(maxSize, y - num);
+                maxSize = Math.max(maxSize, j - num);
             }
         }
 
