@@ -22,6 +22,7 @@ public class LC594FindLHS {
 
         int maxSize = 0;
         for (int num : nums) {
+            // Need to check num + 1 in the map
             if (hashMap.containsKey(num + 1)){
                 maxSize = Math.max(maxSize, hashMap.get(num) + hashMap.get(num + 1));
             }
