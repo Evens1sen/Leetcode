@@ -2,12 +2,19 @@ package binary;
 
 import java.util.Arrays;
 
+/* Binary search:
+   The problem is that in a sorted sequence [a1, a2, a3, .., ak, ... an-1, an]
+   there is some function check(ak) that is true for i < k and false for i > k
+   In other word, k is the critical point of the series
+*/
+
 public class LC34SearchRange {
     public static void main(String[] args) {
         int[] nums = {5, 7, 7, 8, 8, 10};
-        int target = 8;
-        int[] result = searchRange(nums, target);
-        System.out.println(Arrays.toString(result));
+        int target = 9;
+        System.out.println(searchRightBound(nums, target));
+//        int[] result = searchRange(nums, target);
+//        System.out.println(Arrays.toString(result));
     }
 
     public static int[] searchRange(int[] nums, int target) {
@@ -17,6 +24,8 @@ public class LC34SearchRange {
 
         int left = searchLeftBound(nums, target);
         int right = searchLeftBound(nums, target + 1) - 1;
+        // If target not exists in the nums
+        // left is the insert position and may be overflow
         if (left == nums.length || nums[left] != target) {
             return new int[]{-1, -1};
         } else {
@@ -28,6 +37,8 @@ public class LC34SearchRange {
     public static int searchLeftBound(int[] nums, int target) {
         int left = 0;
         int right = nums.length;
+        // Search interval is [left, right)
+        // Terminate when left == right
         while (left < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] < target) {
@@ -37,6 +48,7 @@ public class LC34SearchRange {
             }
         }
 
+        // left is the insert position, need to be verified by the caller
         return left;
     }
 
