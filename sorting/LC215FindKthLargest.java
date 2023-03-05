@@ -1,5 +1,6 @@
 package sorting;
 
+import java.util.PriorityQueue;
 import java.util.Random;
 
 public class LC215FindKthLargest {
@@ -83,15 +84,15 @@ public class LC215FindKthLargest {
 
 
     // The heap implementation
-//    public static int findKthLargest(int[] nums, int k) {
-//        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
-//        for (int i = 0; i < nums.length; i++) {
-//            priorityQueue.add(nums[i]);
-//            if (priorityQueue.size() > k) {
-//                priorityQueue.poll();
-//            }
-//        }
-//
-//        return priorityQueue.peek();
-//    }
+    public static int heapSolution(int[] nums, int k) {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        for (int num : nums) {
+            priorityQueue.add(num);
+            if (priorityQueue.size() > k) {
+                priorityQueue.poll();
+            }
+        }
+
+        return priorityQueue.peek();
+    }
 }

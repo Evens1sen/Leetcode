@@ -10,20 +10,21 @@ public class LC75SortColors {
         System.out.println(Arrays.toString(nums));
     }
 
+    // Pay attention to details
     public static void sortColors(int[] nums) {
-        int zero = 0;
-        int two = nums.length - 1;
+        int zero = -1; // The right bound for zeros
+        int two = nums.length; // The left bound for twos
         int i = 0;
-        while (i <= two) {
+        while (i < two) {
             if (nums[i] == 0) {
-                swap(nums, i, zero);
                 zero++;
+                swap(nums, i, zero); // The new nums[i] must be 1
                 i++;
             } else if (nums[i] == 2) {
-                swap(nums, i, two);
                 two--;
+                swap(nums, i, two); // The new nums[i] may be 0 or 1
             } else {
-                i++;
+                i++; // nums[i] == 1
             }
         }
     }
