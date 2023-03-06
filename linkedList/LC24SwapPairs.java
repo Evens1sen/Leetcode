@@ -1,5 +1,7 @@
 package linkedList;
 
+import java.util.List;
+
 public class LC24SwapPairs {
 
     public static void main(String[] args) {
@@ -13,18 +15,22 @@ public class LC24SwapPairs {
         return iterativeSwapPairs(head);
     }
 
+    // Change the forward edges first
+    // Then change the backward edges
     public static ListNode iterativeSwapPairs(ListNode head) {
-        ListNode dummy = new ListNode(-1);
+        ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
-        while (pre.next != null && pre.next.next != null) {
-            ListNode l1 = pre.next;
-            ListNode l2 = pre.next.next;
-            pre.next = l2;
-            l1.next = l2.next;
-            l2.next = l1;
-            pre = l1;
+        ListNode prev = dummy;
+        ListNode node1 = head;
+        while (node1 != null && node1.next != null) {
+            ListNode node2 = node1.next;
+            prev.next = node2;
+            node1.next = node2.next;
+            node2.next = node1;
+            prev = node1;
+            node1 = node1.next;
         }
+
         return dummy.next;
     }
 

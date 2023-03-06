@@ -25,6 +25,7 @@ public class LC206ReverseList {
         return newHead;
     }
 
+    // Use two pointers to iterative the linkedlist
     private static ListNode iterativeReverse(ListNode head) {
         ListNode pre = null;
         ListNode cur = head;
