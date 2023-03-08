@@ -2,7 +2,7 @@ package dynamic;
 
 import java.util.Arrays;
 
-public class LC322CoinChange {
+public class LC322CoinChange2 {
 
     public static void main(String[] args) {
         int[] coins = {1, 2, 5};

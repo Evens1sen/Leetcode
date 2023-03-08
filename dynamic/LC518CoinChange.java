@@ -1,6 +1,6 @@
 package dynamic;
 
-public class LC518Change {
+public class LC518CoinChange {
 
     public int change(int amount, int[] coins) {
         int n = coins.length;
