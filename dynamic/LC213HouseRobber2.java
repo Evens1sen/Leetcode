@@ -1,6 +1,6 @@
 package dynamic;
 
-public class LC213Rob2 {
+public class LC213HouseRobber2 {
 
     public int rob(int[] nums) {
         int n = nums.length;

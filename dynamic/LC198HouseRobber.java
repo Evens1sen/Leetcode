@@ -1,6 +1,6 @@
 package dynamic;
 
-public class LC198Rob {
+public class LC198HouseRobber {
 
     public int rob(int[] nums) {
         // Base cases: Used for preventing array index out of bound

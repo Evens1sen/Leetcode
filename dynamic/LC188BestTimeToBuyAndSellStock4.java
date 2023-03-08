@@ -1,6 +1,6 @@
 package dynamic;
 
-public class LC188MaxProfitK {
+public class LC188BestTimeToBuyAndSellStock4 {
 
     public static void main(String[] args) {
         int k = 2;
@@ -8,6 +8,11 @@ public class LC188MaxProfitK {
         System.out.println(maxProfit(k, prices));
     }
 
+    /* The general framework to solve stock problems with DP
+       We have three states: day, number of trades, hold or not
+       dp[i][j][0] = max(dp[i-1][j][0], dp[i-1][j-1][1] + price[i])
+       dp[i][j][1] = max(dp[i-1][j][1], dp[i-1][j-1][0] - price[i])
+     */
     public static int maxProfit(int k, int[] prices) {
         if (prices.length == 0) {
             return 0;

@@ -1,6 +1,6 @@
 package dynamic;
 
-public class LC121MaxProfit {
+public class LC121BestTimeToBuyAndSellStock {
 
     public static void main(String[] args) {
         int[] price = {7, 1, 5, 3, 6, 4};

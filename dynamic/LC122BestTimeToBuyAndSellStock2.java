@@ -1,6 +1,6 @@
 package dynamic;
 
-public class LC122MaxProfitInf {
+public class LC122BestTimeToBuyAndSellStock2 {
 
     public int maxProfit(int[] prices) {
         if (prices.length == 0) {
@@ -11,7 +11,6 @@ public class LC122MaxProfitInf {
         int[][] dp = new int[n + 1][2];
         dp[0][0] = 0;
         dp[0][1] = Integer.MIN_VALUE;
-
 
         for (int i = 1; i <= n; i++) {
             dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i - 1]);
