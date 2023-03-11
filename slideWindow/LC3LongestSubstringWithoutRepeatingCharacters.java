@@ -1,4 +1,4 @@
-package string;
+package slideWindow;
 
 import java.util.HashSet;
 import java.util.Set;
