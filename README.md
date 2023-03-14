@@ -7,4 +7,6 @@ A recommended practice list is leetcode blind 75: https://leetcode.com/discuss/g
 
 2.1 摆了两个月，学一阵
 
+3.10 来offer了，爽
+
 ![啊晴可爱喵](https://github.com/Evens1sen/Leetcode/blob/master/keqing.png)
