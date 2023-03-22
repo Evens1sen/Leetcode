@@ -20,15 +20,16 @@ public class LC24SwapPairs {
     public static ListNode iterativeSwapPairs(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
+
         ListNode prev = dummy;
-        ListNode node1 = head;
-        while (node1 != null && node1.next != null) {
-            ListNode node2 = node1.next;
-            prev.next = node2;
-            node1.next = node2.next;
-            node2.next = node1;
-            prev = node1;
-            node1 = node1.next;
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            ListNode next = cur.next;
+            prev.next = next;
+            cur.next = next.next;
+            next.next = cur;
+            prev = cur;
+            cur = cur.next;
         }
 
         return dummy.next;

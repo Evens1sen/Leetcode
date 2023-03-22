@@ -10,6 +10,10 @@ public class LC328OddEvenList {
         ListNode odd = head;
         ListNode even = head.next;
         ListNode evenHead = head.next;
+
+        // Think about the edge condition:
+        // We use even.next, so even cannot be null
+        // We also use even.next.next, so even.next cannot be null
         while (even != null && even.next != null) {
             odd.next = even.next;
             odd = odd.next;
