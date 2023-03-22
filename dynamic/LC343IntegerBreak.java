@@ -1,5 +1,8 @@
 package dynamic;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LC343IntegerBreak {
 
     public int integerBreak(int n) {
@@ -21,5 +24,25 @@ public class LC343IntegerBreak {
         }
 
         return dp[n];
+    }
+
+    Map<Integer, Integer> memo = new HashMap<>();
+
+    public int memoSolution(int n) {
+        if (n <= 2) {
+            return 1;
+        }
+
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }
+
+        int max = 0;
+        for (int i = 1; i < n; i++) {
+            max = Math.max(max, Math.max(i * (n - i), i * memoSolution(n - i)));
+        }
+
+        memo.put(n, max);
+        return max;
     }
 }
