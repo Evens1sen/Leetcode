@@ -19,35 +19,42 @@ public class LC76MinimumWindowSubstring {
             target.put(t.charAt(i), target.getOrDefault(t.charAt(i), 0) + 1);
         }
 
-        int left = 0;
-        int min = Integer.MAX_VALUE;
-        int minLeft = -1;
-        for (int right = 0; right <= s.length(); right++) {
-            while (check(window, target)) {
-                min = Math.min(min, right - left);
-                minLeft = left;
-                char toRemove = s.charAt(left);
-                window.put(toRemove, window.get(toRemove) - 1);
+        int left = 0, right = 0; // The slide window [left, right)
+        int start = 0, minLength = 0; // Minimal window start and length
+        int valid = 0; // Number of valid characters in target
+        while (right < s.length()) {
+            // Enlarge the window
+            char ch = s.charAt(right);
+            right++;
+
+            // Only need to consider the needed characters by the target
+            if (target.containsKey(ch)) {
+                window.put(ch, window.getOrDefault(ch, 0) + 1);
+                if (window.get(ch).equals(target.get(ch))) {
+                    valid++;
+                }
+            }
+
+            // Shrink the window
+            while (valid == target.size()) {
+                if (right - left < minLength) {
+                    start = left;
+                    minLength = right - left;
+                }
+
+                char d = s.charAt(left);
                 left++;
-            }
-
-            if (right < s.length()) {
-                char toAdd = s.charAt(right);
-                window.put(toAdd, window.getOrDefault(toAdd, 0) + 1);
-            }
-        }
-
-        return minLeft == -1 ? "" : s.substring(minLeft, minLeft + min);
-    }
-
-    public static boolean check(Map<Character, Integer> window, Map<Character, Integer> target) {
-        for (Character ch : target.keySet()) {
-            int freq = target.get(ch);
-            if (window.get(ch) == null || window.get(ch) < (freq)) {
-                return false;
+                if (window.containsKey(d)) {
+                    if (window.get(d).equals(target.get(d))) {
+                        valid--;
+                    }
+                    window.put(d, window.get(d) - 1);
+                }
             }
         }
 
-        return true;
+        return s.substring(start, start + minLength);
     }
+
+
 }
