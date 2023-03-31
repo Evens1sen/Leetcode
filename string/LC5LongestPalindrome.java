@@ -14,27 +14,28 @@ public class LC5LongestPalindrome {
             return "";
         }
 
-        int left = 0, right = 0;
+        String res = "";
         for (int i = 0; i < s.length(); i++) {
-            int oddLength = expand(s, i, i);
-            int evenLength = expand(s, i, i + 1);
-            int maxLength = Math.max(oddLength, evenLength);
-            if (maxLength > (right - left + 1)) {
-                left = i - (maxLength - 1) / 2;
-                right = i + maxLength / 2;
+            String odd = expand(s, i, i);
+            String even = expand(s, i, i + 1);
+            if (odd.length() > res.length()) {
+                res = odd;
+            }
+            if (even.length() > res.length()) {
+                res = even;
             }
         }
 
-        return s.substring(left, right + 1);
+        return res;
     }
 
-    public static int expand(String s, int left, int right) {
-        while (left >= 0 && right < s.length()
+    public static String expand(String s, int left, int right) {
+        while (left >= 0 && right <= s.length() - 1
                 && s.charAt(left) == s.charAt(right)) {
             left--;
             right++;
         }
 
-        return right - left - 1;
+        return s.substring(left + 1, right);
     }
 }
