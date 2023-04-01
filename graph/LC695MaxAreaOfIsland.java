@@ -1,4 +1,4 @@
-package searching;
+package graph;
 
 public class LC695MaxAreaOfIsland {
 

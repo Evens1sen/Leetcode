@@ -1,4 +1,4 @@
-package searching;
+package graph;
 
 import java.util.Deque;
 import java.util.LinkedList;
