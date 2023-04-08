@@ -6,40 +6,29 @@ public class LC785IsBipartite {
     static boolean result = true;
 
     public static void main(String[] args) {
-//        int[][] graph = {{3, 4, 6}, {3, 6}, {3, 6}, {0, 1, 2, 5}, {0, 7, 8}, {3}, {0, 1, 2, 7}, {4, 6}, {4}, {}};
-//        int[][] graph = {{1, 2, 3}, {0, 2}, {0, 1, 3}, {0, 2}};
         int[][] graph = {{1, 3}, {0, 2}, {1, 3}, {0, 2}};
         System.out.println(isBipartite(graph));
     }
 
-    // DFS solution
-//    public static boolean isBipartite(int[][] graph) {
-//        int[] colors = new int[graph.length];
-//        for (int start = 0; start < graph.length; start++) {
-//            if (colors[start] == 0) {
-//                colors[start] = 1;
-//                dfs(graph, start, colors);
-//                if (!result) {
-//                    break;
-//                }
-//            }
-//        }
-//        return result;
-//    }
-
-    //Union-Find set solution
+    // Use graph coloring to check bipartite
+    // We can use dfs or union-find set
     public static boolean isBipartite(int[][] graph) {
-        UnionFind unionFind = new UnionFind(graph.length);
-        for (int i = 0; i < graph.length; i++) {
-            int[] adjacency = graph[i];
-            for (int neighbour : adjacency) {
-                if (unionFind.isConnected(i, neighbour)) {
-                    return false;
+        return dfsSolution(graph);
+    }
+
+    // DFS solution
+    public static boolean dfsSolution(int[][] graph) {
+        int[] colors = new int[graph.length];
+        for (int start = 0; start < graph.length; start++) {
+            if (colors[start] == 0) {
+                colors[start] = 1;
+                dfs(graph, start, colors);
+                if (!result) {
+                    break;
                 }
-                unionFind.union(adjacency[0], neighbour);
             }
         }
-        return true;
+        return result;
     }
 
     // The template for dfs in graph
@@ -58,6 +47,21 @@ public class LC785IsBipartite {
                 dfs(graph, neighbour, colors);
             }
         }
+    }
+
+    //Union-Find set solution
+    public static boolean unionFindSolution(int[][] graph) {
+        UnionFind unionFind = new UnionFind(graph.length);
+        for (int i = 0; i < graph.length; i++) {
+            int[] adjacency = graph[i];
+            for (int neighbour : adjacency) {
+                if (unionFind.isConnected(i, neighbour)) {
+                    return false;
+                }
+                unionFind.union(adjacency[0], neighbour);
+            }
+        }
+        return true;
     }
 
     // A template for union-find set
