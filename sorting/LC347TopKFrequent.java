@@ -1,52 +1,59 @@
 package sorting;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class LC347TopKFrequent {
 
-    public int[] topKFrequent(int[] nums, int k) {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 1, 2, 2, 3};
+        int k = 2;
+        System.out.println(Arrays.toString(topKFrequent(nums, k)));
+    }
+
+    public static int[] topKFrequent(int[] nums, int k) {
         return topKFrequentBucket(nums, k);
     }
 
     // A bucket sort implementation
-    public int[] topKFrequentBucket(int[] nums, int k) {
-        HashMap<Integer, Integer> freqMap = new HashMap<>();
-        for (int i : nums) {
-            freqMap.put(i, freqMap.getOrDefault(i, 0) + 1);
+    public static int[] topKFrequentBucket(int[] nums, int k) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
+        for (int num : nums) {
+            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
         }
 
-        List[] buckets = new List[nums.length + 1];
-        for (Integer key : freqMap.keySet()) {
-            int frequency = freqMap.get(key);
-            if (buckets[frequency] == null) {
-                buckets[frequency] = new LinkedList<>();
+        List<Integer>[] buckets = new ArrayList[nums.length + 1];
+        for (int key : freqMap.keySet()) {
+            int freq = freqMap.get(key);
+            if (buckets[freq] == null) {
+                buckets[freq] = new ArrayList<>();
             }
-            buckets[frequency].add(key);
+            buckets[freq].add(key);
         }
 
-        List<Integer> topK = new LinkedList<>();
-        for (int i = buckets.length - 1; i >= 0 && topK.size() < k; i--) {
-            if (buckets[i] == null) {
+        // buckets = [l0, l1, l2, ..., ln]
+        // We iterate from back to the front to get k numbers
+        List<Integer> topK = new ArrayList<>();
+        int j = nums.length;
+        while (topK.size() < k && j >= 0) {
+            if (buckets[j] == null) {
+                j--;
                 continue;
             }
 
-            if (buckets[i].size() <= (k - topK.size())) {
-                topK.addAll(buckets[i]);
+            int bucketSize = buckets[j].size();
+            if (bucketSize < k - topK.size()) {
+                topK.addAll(buckets[j]);
             } else {
-                topK.addAll(buckets[i].subList(0, k - topK.size()));
+                topK.addAll(buckets[j].subList(0, k - topK.size()));
             }
+            j--;
         }
 
-        int[] result = new int[k];
-        int i = 0;
-        for (Integer val : topK) {
-            result[i++] = val;
+        int[] res = new int[k];
+        for (int a = 0; a < k; a++) {
+            res[a] = topK.get(a);
         }
-
-        return result;
+        return res;
     }
-
 
 }
