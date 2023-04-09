@@ -1,4 +1,4 @@
-package array;
+package math;
 
 public class LC633JudgeSquareSum {
 

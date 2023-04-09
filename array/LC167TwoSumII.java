@@ -1,6 +1,6 @@
 package array;
 
-public class LC167TwoSum {
+public class LC167TwoSumII {
 
     public int[] twoSum(int[] numbers, int target) {
         int i = 0;

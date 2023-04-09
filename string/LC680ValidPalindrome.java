@@ -1,4 +1,4 @@
-package array;
+package string;
 
 public class LC680ValidPalindrome {
 
