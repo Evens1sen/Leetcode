@@ -19,4 +19,6 @@ Leetcode 400: https://www.cspiration.com/#/leetcodeClassification
 
 4.12 接了UCLA的offer，准备润
 
+4.21 你妈死了
+
 ![啊晴可爱喵](https://github.com/Evens1sen/Leetcode/blob/master/keqing.png)
