@@ -23,4 +23,6 @@ Leetcode 400: https://www.cspiration.com/#/leetcodeClassification
 
 4.24 null
 
+7.12 上班好累，摸鱼刷一会leetcode
+
 ![啊晴可爱喵](https://github.com/Evens1sen/Leetcode/blob/master/keqing.png)
