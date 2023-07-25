@@ -8,21 +8,6 @@ class LRUCache {
     public static void main(String[] args) {
         LRUCache lruCache = new LRUCache(2);
         lruCache.put(1, 1);
-//        lruCache.put(2, 2);
-//        lruCache.get(1);
-//        lruCache.put(3, 3);
-    }
-
-    static class ListNode {
-        int key;
-        int val;
-        ListNode prev;
-        ListNode next;
-
-        public ListNode(int key, int val) {
-            this.key = key;
-            this.val = val;
-        }
     }
 
     int capacity;
@@ -72,7 +57,7 @@ class LRUCache {
     }
 
     private void moveToHead(ListNode node) {
-        if (node.next != null && node.prev != null){
+        if (node.next != null && node.prev != null) {
             deleteNode(node);
         }
         insertToHead(node);
@@ -90,6 +75,18 @@ class LRUCache {
         node.next = head.next;
         head.next = node;
         node.next.prev = node;
+    }
+
+    static class ListNode {
+        int key;
+        int val;
+        ListNode prev;
+        ListNode next;
+
+        public ListNode(int key, int val) {
+            this.key = key;
+            this.val = val;
+        }
     }
 
 }

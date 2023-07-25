@@ -2,22 +2,33 @@ package linkedList;
 
 public class LC148SortList {
 
-    public ListNode sortList(ListNode head) {
+    public static void main(String[] args) {
+        ListNode list = new ListNode(4, new ListNode(2, new ListNode(1, new ListNode(3, null))));
+        list = sortList(list);
+        list.printList();
+    }
+
+    public static ListNode sortList(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-        ListNode slow = head, fast = head.next;
+
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = null;
         while (fast != null && fast.next != null) {
+            prev = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
-        ListNode right = sortList(slow.next);
-        slow.next = null;
+
+        prev.next = null;
         ListNode left = sortList(head);
+        ListNode right = sortList(slow);
         return merge(left, right);
     }
 
-    private ListNode merge(ListNode l1, ListNode l2) {
+    private static ListNode merge(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1);
         ListNode curr = dummy;
         while (l1 != null && l2 != null) {
