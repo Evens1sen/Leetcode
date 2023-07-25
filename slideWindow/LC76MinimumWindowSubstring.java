@@ -11,50 +11,53 @@ public class LC76MinimumWindowSubstring {
         System.out.println(minWindow(s, t));
     }
 
-    // FIXME
     public static String minWindow(String s, String t) {
-        Map<Character, Integer> window = new HashMap<>();
-        Map<Character, Integer> target = new HashMap<>();
-        for (int i = 0; i < t.length(); i++) {
-            target.put(t.charAt(i), target.getOrDefault(t.charAt(i), 0) + 1);
+        int m = s.length();
+        int n = t.length();
+        if (m < n) {
+            return "";
         }
 
-        int left = 0, right = 0; // The slide window [left, right)
-        int start = 0, minLength = 0; // Minimal window start and length
-        int valid = 0; // Number of valid characters in target
-        while (right < s.length()) {
-            // Enlarge the window
-            char ch = s.charAt(right);
-            right++;
+        Map<Character, Integer> sFreq = new HashMap<>();
+        Map<Character, Integer> tFreq = new HashMap<>();
+        for (char ch : t.toCharArray()) {
+            tFreq.put(ch, tFreq.getOrDefault(ch, 0) + 1);
+        }
 
-            // Only need to consider the needed characters by the target
-            if (target.containsKey(ch)) {
-                window.put(ch, window.getOrDefault(ch, 0) + 1);
-                if (window.get(ch).equals(target.get(ch))) {
-                    valid++;
+        int left = 0;
+        int right = 0;
+        int min = m + 1;
+        String minWindow = "";
+        sFreq.put(s.charAt(left), sFreq.getOrDefault(s.charAt(left), 0) + 1);
+        while (left <= right && right < m) {
+            if (check(sFreq, tFreq)) {
+                int size = right - left + 1;
+                if (size < min) {
+                    min = size;
+                    minWindow = s.substring(left, right + 1);
                 }
-            }
-
-            // Shrink the window
-            while (valid == target.size()) {
-                if (right - left < minLength) {
-                    start = left;
-                    minLength = right - left;
-                }
-
-                char d = s.charAt(left);
+                sFreq.put(s.charAt(left), sFreq.getOrDefault(s.charAt(left), 0) - 1);
                 left++;
-                if (window.containsKey(d)) {
-                    if (window.get(d).equals(target.get(d))) {
-                        valid--;
-                    }
-                    window.put(d, window.get(d) - 1);
+            } else {
+                right++;
+                if (right < m) {
+                    sFreq.put(s.charAt(right), sFreq.getOrDefault(s.charAt(right), 0) + 1);
                 }
             }
         }
 
-        return s.substring(start, start + minLength);
+        return minWindow;
     }
 
+    public static boolean check(Map<Character, Integer> sFreq, Map<Character, Integer> tFreq) {
+        for (Map.Entry<Character, Integer> tEntry : tFreq.entrySet()) {
+            Character ch = tEntry.getKey();
+            Integer freq = tEntry.getValue();
+            if (!(sFreq.containsKey(ch) && sFreq.get(ch) >= freq)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
