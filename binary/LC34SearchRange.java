@@ -10,27 +10,19 @@ import java.util.Arrays;
 
 public class LC34SearchRange {
     public static void main(String[] args) {
-        int[] nums = {5, 7, 7, 8, 8, 10};
-        int target = 9;
-        System.out.println(searchRightBound(nums, target));
-//        int[] result = searchRange(nums, target);
-//        System.out.println(Arrays.toString(result));
+        int[] nums = {1};
+        int target = 1;
+        System.out.println(Arrays.toString(searchRange(nums, target)));
     }
 
     public static int[] searchRange(int[] nums, int target) {
-        if (nums.length == 0) {
+        int left = searchLeftBound(nums, target);
+        if (left == nums.length || nums[left] != target) {
             return new int[]{-1, -1};
         }
 
-        int left = searchLeftBound(nums, target);
         int right = searchLeftBound(nums, target + 1) - 1;
-        // If target not exists in the nums
-        // left is the insert position and may be overflow
-        if (left == nums.length || nums[left] != target) {
-            return new int[]{-1, -1};
-        } else {
-            return new int[]{left, right};
-        }
+        return new int[]{left, right};
     }
 
     // Ignore index out of bound and missing
