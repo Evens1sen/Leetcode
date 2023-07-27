@@ -12,10 +12,11 @@ public class LC739DailyTemperatures {
     }
 
     public static int[] dailyTemperatures(int[] temperatures) {
-        int[] res = new int[temperatures.length];
+        int n = temperatures.length;
+        int[] res = new int[n];
         Deque<Integer> stack = new LinkedList<>();
 
-        for (int i = 0; i < temperatures.length; i++) {
+        for (int i = 0; i < n; i++) {
             while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
                 int index = stack.pop();
                 res[index] = i - index;
