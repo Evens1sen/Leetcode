@@ -3,7 +3,7 @@ package tree;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class LC513FindBottomLeftTreeValue {
+public class LC513FindBottomLeft {
 
     public int findBottomLeftValue(TreeNode root) {
         int res = 0;

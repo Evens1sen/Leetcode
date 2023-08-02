@@ -3,7 +3,7 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LC589NaryTreePreorderTraversal {
+public class LC589NaryTreePreorder {
 
     List<Integer> res = new ArrayList<>();
 

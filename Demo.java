@@ -8,8 +8,4 @@ import java.util.PriorityQueue;
 import java.util.zip.InflaterInputStream;
 
 public class Demo {
-
-    public static void main(String[] args) {
-
-    }
 }

@@ -1,6 +1,6 @@
 package tree;
 
-public class LC236LowestCommonAncestorOfABinaryTree {
+public class LC236LCAOfBinaryTree {
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {

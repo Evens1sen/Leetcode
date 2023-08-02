@@ -3,7 +3,7 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LC95UniqueBinarySearchTreesII {
+public class LC95UniqueBST2 {
 
     public static void main(String[] args) {
         System.out.println(generateTrees(2));

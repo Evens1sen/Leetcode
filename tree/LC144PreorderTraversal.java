@@ -5,7 +5,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LC144BinaryTreePreorderTraversal {
+public class LC144PreorderTraversal {
 
     public List<Integer> preorderTraversal(TreeNode root) {
         return iterativeSolution(root);

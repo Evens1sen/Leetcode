@@ -1,6 +1,6 @@
 package tree;
 
-public class LC235LowestCommonAncestorOfABinarySearchTree {
+public class LC235LCAOfBST {
 
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (p.val < root.val && q.val < root.val) {

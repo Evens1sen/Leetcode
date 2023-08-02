@@ -1,6 +1,6 @@
 package tree;
 
-public class LC96UniqueBinarySearchTrees {
+public class LC96UniqueBST {
 
     int[][] memo;
 

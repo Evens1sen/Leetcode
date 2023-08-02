@@ -5,7 +5,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class LC637AverageOfLevelsInBinaryTree {
+public class LC637AverageOfTree {
 
     public List<Double> averageOfLevels(TreeNode root) {
         if (root == null) {

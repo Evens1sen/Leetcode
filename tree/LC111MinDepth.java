@@ -3,7 +3,7 @@ package tree;
 import java.util.Deque;
 import java.util.LinkedList;
 
-public class LC111MinimumDepthOfBinaryTree {
+public class LC111MinDepth {
 
     public int minDepth(TreeNode root) {
         if (root == null) {

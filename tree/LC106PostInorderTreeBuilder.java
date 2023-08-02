@@ -3,7 +3,7 @@ package tree;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LC106ConstructBinaryTreeFromInorderAndPostorderTraversal {
+public class LC106PostInorderTreeBuilder {
 
     Map<Integer, Integer> indexMap = new HashMap<>();
 

@@ -1,6 +1,6 @@
 package tree;
 
-public class LC654MaximumBinaryTree {
+public class LC654MaxBinaryTree {
 
     public TreeNode constructMaximumBinaryTree(int[] nums) {
         return buildTree(nums, 0, nums.length - 1);
@@ -11,12 +11,8 @@ public class LC654MaximumBinaryTree {
             return null;
         }
 
-        if (left == right) {
-            return new TreeNode(nums[left]);
-        }
-
-        int max = -1;
-        int maxIndex = -1;
+        int max = nums[left];
+        int maxIndex = left;
         for (int i = left; i <= right; i++) {
             if (nums[i] > max) {
                 max = nums[i];
@@ -24,9 +20,9 @@ public class LC654MaximumBinaryTree {
             }
         }
 
-        TreeNode root = new TreeNode(nums[maxIndex]);
-        root.left = buildTree(nums, left, maxIndex - 1);
-        root.right = buildTree(nums, maxIndex + 1, right);
+        TreeNode leftTree = buildTree(nums, left, maxIndex - 1);
+        TreeNode rightTree = buildTree(nums, maxIndex + 1, right);
+        TreeNode root = new TreeNode(nums[maxIndex], leftTree, rightTree);
         return root;
     }
 }
