@@ -1,5 +1,6 @@
 package dynamic;
 
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -12,16 +13,18 @@ public class LC279PerfectSquares {
 
     public int dpSolution(int n) {
         // dp[i] = min(dp[i - j^2]) + 1 for j^2 < i
+        int upperBound = (int) Math.sqrt(n);
         int[] dp = new int[n + 1];
+        Arrays.fill(dp, n + 1);
+        dp[0] = 0;
         for (int i = 1; i <= n; i++) {
-            int minn = Integer.MAX_VALUE;
-            for (int j = 1; j * j <= i; j++) {
-                minn = Math.min(minn, dp[i - j * j]);
+            for (int j = 1; j <= upperBound; j++) {
+                if (j * j <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - j*j] + 1);
+                }
             }
-            dp[i] = minn + 1;
         }
-
-        return dp[n];
+        return dp[n] == n + 1 ? -1 : dp[n];
     }
 
     public int bfsSolution(int n) {
