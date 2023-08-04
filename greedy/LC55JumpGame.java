@@ -17,18 +17,21 @@ public class LC55JumpGame {
         return false;
     }
 
-    // O(n^2) solution, not optimal
-    public boolean dpSolution(int[] nums) {
+    public boolean canJumpDp(int[] nums) {
         int n = nums.length;
-        boolean[] dp = new boolean[n];
-        dp[0] = true;
-
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j <= i; j++) {
-                dp[i] = dp[i] || (dp[i - j] && nums[i - j] >= j);
-            }
+        if (n == 1) {
+            return true;
         }
 
-        return dp[n - 1];
+        // dp[i]: The maximum index the position can reach
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            if (dp[i - 1] < i) {
+                return false;
+            }
+            dp[i] = Math.max(dp[i - 1], nums[i] + i);
+        }
+        return dp[n - 2] >= n - 1;
     }
 }
