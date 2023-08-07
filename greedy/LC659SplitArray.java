@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class LC659SplitArrayIntoConsecutiveSubsequences {
+public class LC659SplitArray {
 
     public boolean isPossible(int[] nums) {
         return greedy1(nums);

@@ -8,7 +8,6 @@ public class LC22GenerateParentheses {
     List<String> res = new ArrayList<>();
 
     public List<String> generateParenthesis(int n) {
-        //generate("", 0, n * 2);
         StringBuilder track = new StringBuilder();
         backtracking(n, n, track);
         return res;
@@ -40,19 +39,7 @@ public class LC22GenerateParentheses {
         track.deleteCharAt(track.length() - 1);
     }
 
-    public void generate(String path, int depth, int n) {
-        if (depth == n) {
-            if (valid(path)) {
-                res.add(path);
-            }
-            return;
-        }
-
-        generate(path + "(", depth + 1, n);
-        generate(path + ")", depth + 1, n);
-    }
-
-    public boolean valid(String path) {
+    public boolean check(String path) {
         int balance = 0;
         for (char c : path.toCharArray()) {
             if (c == '(') {

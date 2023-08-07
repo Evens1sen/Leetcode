@@ -2,6 +2,7 @@ package tree;
 
 public class LC236LCAOfBinaryTree {
 
+    // Subtree root exists node p or node q
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {
             return root;
