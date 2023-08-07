@@ -49,7 +49,7 @@ public class LC785IsBipartite {
         }
     }
 
-    //Union-Find set solution
+    // Union-Find set solution
     public static boolean unionFindSolution(int[][] graph) {
         UnionFind unionFind = new UnionFind(graph.length);
         for (int i = 0; i < graph.length; i++) {
@@ -63,33 +63,5 @@ public class LC785IsBipartite {
         }
         return true;
     }
-
-    // A template for union-find set
-    static class UnionFind {
-        int[] fathers;
-
-        public UnionFind(int n) {
-            fathers = new int[n];
-            for (int i = 0; i < n; i++) {
-                fathers[i] = i;
-            }
-        }
-
-        public int find(int i) {
-            if (fathers[i] == i) {
-                return i;
-            }
-            return fathers[i] = find(fathers[i]);
-        }
-
-        public void union(int p, int q) {
-            fathers[find(p)] = find(q);
-        }
-
-        public boolean isConnected(int p, int q) {
-            return find(q) == find(p);
-        }
-    }
-
 
 }

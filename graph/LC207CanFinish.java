@@ -29,7 +29,7 @@ public class LC207CanFinish {
             V = v;
             this.edges = new List[V];
             for (int i = 0; i < V; i++) {
-                edges[i] = new LinkedList<Integer>();
+                edges[i] = new LinkedList<>();
             }
         }
 
