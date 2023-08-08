@@ -4,7 +4,7 @@ class Trie {
 
     private static class TrieNode {
         TrieNode[] children = new TrieNode[26];
-        boolean isLeaf;
+        boolean isEnd;
     }
 
     private final TrieNode root;
@@ -27,7 +27,7 @@ class Trie {
             cur = cur.children[index];
         }
 
-        cur.isLeaf = true;
+        cur.isEnd = true;
     }
 
     private void recursiveInsert(String word, TrieNode root) {
@@ -36,7 +36,7 @@ class Trie {
         }
 
         if (word.length() == 0) {
-            root.isLeaf = true;
+            root.isEnd = true;
             return;
         }
 
@@ -61,7 +61,7 @@ class Trie {
             cur = cur.children[index];
         }
 
-        return cur.isLeaf;
+        return cur.isEnd;
     }
 
     private boolean recursiveSearch(String word, TrieNode root) {
@@ -70,7 +70,7 @@ class Trie {
         }
 
         if (word.length() == 0) {
-            return root.isLeaf;
+            return root.isEnd;
         }
 
         int index = word.charAt(0) - 'a';
