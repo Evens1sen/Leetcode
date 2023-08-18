@@ -15,6 +15,16 @@ public class LC55JumpGame {
             }
         }
         return false;
+
+        // Alternative approach using a while loop
+//        int i = 0;
+//        while (i <= rightmost) {
+//            rightmost = Math.max(rightmost, i + nums[i]);
+//            if (rightmost >= n - 1) {
+//                return true;
+//            }
+//            i++;
+//        }
     }
 
     public boolean canJumpDp(int[] nums) {

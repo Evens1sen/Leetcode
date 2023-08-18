@@ -19,4 +19,14 @@ public class LC122BestTimeToBuyAndSellStock2 {
 
         return dp[n][0];
     }
+
+    public int greedySolution(int[] prices) {
+        int res = 0;
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                res += prices[i] - prices[i - 1];
+            }
+        }
+        return res;
+    }
 }

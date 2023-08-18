@@ -1,6 +1,6 @@
 package array;
 
-public class LC26RemoveDuplicate {
+public class LC26RemoveDuplicates {
 
     // [1, 1, 3, 4, 4, 6] -> [1, 3, 4, 6]
     public int removeDuplicates(int[] nums) {

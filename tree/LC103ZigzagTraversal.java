@@ -1,26 +1,35 @@
 package tree;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public class LC103ZigzagTraversal {
 
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
-            return new ArrayList<>();
+            return res;
         }
 
-        List<List<Integer>> res = new ArrayList<>();
         Deque<TreeNode> queue = new LinkedList<>();
         queue.add(root);
+        boolean isOrderLeft = true;
 
         while (!queue.isEmpty()) {
+            List<Integer> levelList = new LinkedList<>();
             int size = queue.size();
-            int depth = res.size();
-            List<Integer> level = new ArrayList<>();
-
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < size; ++i) {
                 TreeNode cur = queue.poll();
-                level.add(cur.val);
+                if (isOrderLeft) {
+                    levelList.add(cur.val);
+                } else {
+                    levelList.add(0, cur.val);
+                }
+
                 if (cur.left != null) {
                     queue.add(cur.left);
                 }
@@ -28,11 +37,8 @@ public class LC103ZigzagTraversal {
                     queue.add(cur.right);
                 }
             }
-            
-            if (depth % 2 == 0) {
-                Collections.reverse(level);
-            }
-            res.add(level);
+            res.add(levelList);
+            isOrderLeft = !isOrderLeft;
         }
 
         return res;
