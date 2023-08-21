@@ -1,6 +1,6 @@
 package linkedList;
 
-public class LC83DeleteDuplicates {
+public class LC83RemoveDuplicates {
 
     public ListNode iterativeDelete(ListNode head) {
         ListNode cur = head;
