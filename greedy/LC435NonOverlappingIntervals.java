@@ -1,25 +1,23 @@
 package greedy;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class LC435NonOverlappingIntervals {
 
     // The interval schedule problem
     // The classic greedy solution with O(n) complexity
     public int eraseOverlapIntervals(int[][] intervals) {
-        Arrays.sort(intervals, (i1, i2) -> (i1[1] - i2[1]));
-
-        int n = intervals.length;
-        int cnt = 1;
-        int end = intervals[0][1];
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[1]));
+        int cnt = 0;
+        int[] prev = null;
         for (int[] interval : intervals) {
-            if (interval[0] >= end) {
+            if (prev == null || interval[0] >= prev[1]) {
                 cnt++;
-                end = interval[1];
+                prev = interval;
             }
         }
-
-        return n - cnt;
+        return intervals.length - cnt;
     }
 
 }
