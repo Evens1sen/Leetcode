@@ -29,24 +29,28 @@ public class LC42TrappingRainWater {
 
     public int doublePointerSolution(int[] height) {
         int n = height.length;
-        int res = 0;
-        int left = 0;
-        int right = n - 1;
-        int leftMax = height[0];
-        int rightMax = height[n - 1];
+        int i = 0, j = n - 1;
+        int leftMax = 0, rightMax = 0;
 
-        while (left < right) {
-            leftMax = Math.max(leftMax, height[left]);
-            rightMax = Math.max(rightMax, height[right]);
-            if (leftMax < rightMax) {
-                res += leftMax - height[left];
-                left++;
+        // res[i] = min(leftMax[i], rightMax[i]) - height[i]
+        // res[j] = min(leftMax[j], rightMax[j]) - height[j]
+        // leftMax[i] <= leftMax[j]
+        // rightMax[i] >= rightMax[j]
+        // res[i] = min(leftMax[i], rightMax[j]) - height[i]
+        // res[j] = min(leftMax[i], rightMax[j]) - height[i]
+
+        int res = 0;
+        while (i <= j) {
+            leftMax = Math.max(leftMax, height[i]);
+            rightMax = Math.max(rightMax, height[j]);
+            if (height[i] < height[j]) {
+                res += leftMax - height[i];
+                i++;
             } else {
-                res += rightMax - height[right];
-                right--;
+                res += rightMax - height[j];
+                j--;
             }
         }
-
         return res;
     }
 }

@@ -33,6 +33,8 @@ public class LC15ThreeSum {
                     left++;
                     right--;
                     // To avoid skip some answers, we need to skip in this branch
+                    // Only need to avoid repeat in this case
+                    // In other two cases, may cause some lose
                     while (left < right && nums[left] == nums[left - 1]) {
                         left++;
                     }

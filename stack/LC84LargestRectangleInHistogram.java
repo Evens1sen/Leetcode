@@ -12,38 +12,41 @@ public class LC84LargestRectangleInHistogram {
 
     public static int largestRectangleArea(int[] heights) {
         int n = heights.length;
-        int[] left = new int[n];
-        int[] right = new int[n];
-        left[0] = -1;
-        right[n - 1] = n;
+        int[] leftSmaller = new int[n];
+        int[] rightSmaller = new int[n];
+
         Deque<Integer> stack = new LinkedList<>();
-
-        for (int i = 0; i < n; i++) {
-            while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
+        stack.push(0);
+        for (int i = 1; i < n; i++) {
+            while (!stack.isEmpty() && heights[stack.peek()] > heights[i]) {
                 int index = stack.pop();
-                right[index] = i;
+                rightSmaller[index] = i;
             }
             stack.push(i);
         }
         while (!stack.isEmpty()) {
-            right[stack.pop()] = n;
+            int index = stack.pop();
+            rightSmaller[index] = n;
         }
 
+        stack.push(n - 1);
         for (int i = n - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && heights[i] < heights[stack.peek()]) {
+            while (!stack.isEmpty() && heights[stack.peek()] > heights[i]) {
                 int index = stack.pop();
-                left[index] = i;
+                leftSmaller[index] = i;
             }
             stack.push(i);
         }
         while (!stack.isEmpty()) {
-            left[stack.pop()] = -1;
+            int index = stack.pop();
+            leftSmaller[index] = -1;
         }
 
-        int max = 0;
+        int maxArea = 0;
         for (int i = 0; i < n; i++) {
-            max = Math.max(max, heights[i] * (right[i] - left[i] - 1));
+            int area = (rightSmaller[i] - leftSmaller[i] - 1) * heights[i];
+            maxArea = Math.max(maxArea, area);
         }
-        return max;
+        return maxArea;
     }
 }

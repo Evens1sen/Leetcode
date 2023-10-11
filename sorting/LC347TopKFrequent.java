@@ -16,43 +16,37 @@ public class LC347TopKFrequent {
 
     // A bucket sort implementation
     public static int[] topKFrequentBucket(int[] nums, int k) {
-        Map<Integer, Integer> freqMap = new HashMap<>();
+        Map<Integer, Integer> freq = new HashMap<>();
         for (int num : nums) {
-            freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
+            freq.put(num, freq.getOrDefault(num, 0) + 1);
         }
 
-        List<Integer>[] buckets = new ArrayList[nums.length + 1];
-        for (int key : freqMap.keySet()) {
-            int freq = freqMap.get(key);
-            if (buckets[freq] == null) {
-                buckets[freq] = new ArrayList<>();
+        List[] buckets = new List[nums.length + 1];
+        for (Integer num : freq.keySet()) {
+            int f = freq.get(num);
+            if (buckets[f] == null) {
+                buckets[f] = new ArrayList<>();
             }
-            buckets[freq].add(key);
-        }
-
-        // buckets = [l0, l1, l2, ..., ln]
-        // We iterate from back to the front to get k numbers
-        List<Integer> topK = new ArrayList<>();
-        int j = nums.length;
-        while (topK.size() < k && j >= 0) {
-            if (buckets[j] == null) {
-                j--;
-                continue;
-            }
-
-            int bucketSize = buckets[j].size();
-            if (bucketSize < k - topK.size()) {
-                topK.addAll(buckets[j]);
-            } else {
-                topK.addAll(buckets[j].subList(0, k - topK.size()));
-            }
-            j--;
+            buckets[f].add(num);
         }
 
         int[] res = new int[k];
-        for (int a = 0; a < k; a++) {
-            res[a] = topK.get(a);
+        int index = 0;
+        for (int i = nums.length; i >= 0; i--) {
+            if (buckets[i] == null) {
+                continue;
+            }
+
+            List<Integer> cur = buckets[i];
+            for (Integer c : cur) {
+                res[index] = c;
+                index++;
+                if (index == k) {
+                    return res;
+                }
+            }
         }
+
         return res;
     }
 
