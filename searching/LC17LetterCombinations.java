@@ -3,7 +3,7 @@ package searching;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LC17LetterCombinationsOfAPhoneNumber {
+public class LC17LetterCombinations {
 
     public static void main(String[] args) {
         System.out.println(letterCombinations("23"));
@@ -13,7 +13,7 @@ public class LC17LetterCombinationsOfAPhoneNumber {
     static List<String> res = new ArrayList<>();
 
     public static List<String> letterCombinations(String digits) {
-        if (digits.equals("")){
+        if (digits.equals("")) {
             return res;
         }
 
@@ -29,7 +29,8 @@ public class LC17LetterCombinationsOfAPhoneNumber {
 
         char[] choices = keysMapping[dights.charAt(index) - '0'].toCharArray();
         for (char ch : choices) {
-            backtracking(index + 1, path.append(ch), dights);
+            path.append(ch);
+            backtracking(index + 1, path, dights);
             path.deleteCharAt(path.length() - 1);
         }
     }

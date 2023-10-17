@@ -3,7 +3,7 @@ package searching;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LC241DifferentWaysToAddParentheses {
+public class LC241AddParentheses {
 
     public List<Integer> diffWaysToCompute(String expression) {
         List<Integer> res = new ArrayList<>();
