@@ -1,6 +1,6 @@
 package string;
 
-public class Tiktok4OptimalStorage {
+public class TiktokOAOptimalStorage {
 
     public static void main(String[] args) {
         String word = "cba";

@@ -3,7 +3,7 @@ package string;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Tiktok5VulnerablePassword {
+public class TiktokOAVulnerablePassword {
 
     public static void main(String[] args) {
         String password = "abcdabcd";
