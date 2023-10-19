@@ -2,25 +2,28 @@ package math;
 
 public class LC202HappyNumber {
 
+
+    // Similar to linkedlist cycle
     public boolean isHappy(int n) {
-        int times = 1000;
-        while (times > 0) {
-            n = calculate(n);
-            if (n == 1) {
-                return true;
+        int slow = n;
+        int fast = n;
+        while (fast != 1 && getNext(fast) != 1) {
+            slow = getNext(slow);
+            fast = getNext(getNext(fast));
+            if (slow == fast) {
+                return false;
             }
-            times--;
         }
-        return false;
+        return true;
     }
 
-    public int calculate(int n) {
-        int res = 0;
+    public int getNext(int n) {
+        int sum = 0;
         while (n > 0) {
             int digit = n % 10;
-            res += digit * digit;
+            sum += digit * digit;
             n = n / 10;
         }
-        return res;
+        return sum;
     }
 }
