@@ -12,67 +12,66 @@ public class LC215FindKthLargest {
     }
 
     public static int findKthLargest(int[] nums, int k) {
-        int index = nums.length - k;
-        return quickSelect(nums, 0, nums.length - 1, index);
+        k = nums.length - k;
+        return quickSelect(nums, 0, nums.length - 1, k);
     }
 
     // A in-place implementation for quickSort
-    public static void quickSort(int[] arr, int left, int right) {
+    public static void quickSort(int[] nums, int left, int right) {
         if (left >= right) {
             return;
         }
 
-        int pivotIndex = randomPartition(arr, left, right);
-        quickSort(arr, left, pivotIndex - 1);
-        quickSort(arr, pivotIndex + 1, right);
+        int pivotIndex = randomPartition(nums, left, right);
+        quickSort(nums, left, pivotIndex - 1);
+        quickSort(nums, pivotIndex + 1, right);
     }
 
-    public static int quickSelect(int[] arr, int left, int right, int index) {
-        int partitionIndex = randomPartition(arr, left, right);
+    public static int quickSelect(int[] nums, int left, int right, int index) {
+        int partitionIndex = randomPartition(nums, left, right);
         if (partitionIndex == index) {
-            return arr[partitionIndex];
+            return nums[partitionIndex];
         } else if (partitionIndex < index) {
-            return quickSelect(arr, partitionIndex + 1, right, index);
+            return quickSelect(nums, partitionIndex + 1, right, index);
         } else {
-            return quickSelect(arr, left, partitionIndex - 1, index);
+            return quickSelect(nums, left, partitionIndex - 1, index);
         }
     }
 
     // The iterative version for the quick select
     // Idea is similar to binary search
-    public static int quickSelect(int[] arr, int index) {
+    public static int quickSelect(int[] nums, int k) {
         int left = 0;
-        int right = arr.length - 1;
-        while (left <= right) {
-            int partitionIndex = partition(arr, left, right);
-            if (partitionIndex < index) {
-                left = partitionIndex + 1;
-            } else if (partitionIndex > index) {
-                right = partitionIndex - 1;
-            } else {
-                break;
+        int right = nums.length - 1;
+        while (left < right) {
+            int index = partition(nums, left, right);
+            if (index == k) {
+                return nums[index];
+            } else if (index < k) {
+                left = index + 1;
+            } else if (index > k) {
+                right = index - 1;
             }
         }
-
-        return arr[index];
+        return nums[left];
     }
 
-    public static int randomPartition(int[] arr, int left, int right) {
+    public static int randomPartition(int[] nums, int left, int right) {
         Random random = new Random();
         int pivotIndex = random.nextInt(right - left + 1) + left;
-        swap(arr, pivotIndex, right);
-        return partition(arr, left, right);
+        swap(nums, pivotIndex, right);
+        return partition(nums, left, right);
     }
 
-    public static int partition(int[] arr, int left, int right) {
-        int pivot = arr[right];
+    public static int partition(int[] nums, int left, int right) {
+        int pivot = nums[right];
         int i = left;
         for (int j = left; j < right; j++) {
-            if (arr[j] < pivot) {
-                swap(arr, i++, j);
+            if (nums[j] < pivot) {
+                swap(nums, i++, j);
             }
         }
-        swap(arr, i, right);
+        swap(nums, i, right);
         return i;
     }
 
