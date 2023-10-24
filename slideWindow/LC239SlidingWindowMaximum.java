@@ -5,8 +5,8 @@ import java.util.*;
 public class LC239SlidingWindowMaximum {
 
     public static void main(String[] args) {
-        int[] nums = {1, 3, 1, -3, 5, 3, 6, 7};
-        int k = 3;
+        int[] nums = {7, 2, 4};
+        int k = 2;
         System.out.println(Arrays.toString(maxSlidingWindow(nums, k)));
     }
 
@@ -15,49 +15,35 @@ public class LC239SlidingWindowMaximum {
     }
 
     public static int[] dequeSolution(int[] nums, int k) {
-        MonotonicQueue window = new MonotonicQueue();
-        List<Integer> res = new ArrayList<>();
+        int n = nums.length;
+        Deque<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < k; i++) {
+            while (!queue.isEmpty() && queue.peekLast() < nums[i]) {
+                queue.pollLast();
+            }
+            queue.offerLast(nums[i]);
+        }
 
-        for (int i = 0; i < nums.length; i++) {
-            if (i < k - 1) {
-                window.push(nums[i]);
-            } else {
-                window.push(nums[i]);
-                res.add(window.max());
-                window.pop(nums[i - k + 1]);
+        int[] res = new int[n - k + 1];
+        res[0] = queue.peekFirst();
+        if (queue.peekFirst() == nums[0]) {
+            queue.pollFirst();
+        }
+
+        for (int i = 1; i <= nums.length - k; i++) {
+            while (!queue.isEmpty() && queue.peekLast() < nums[i + k - 1]) {
+                queue.pollLast();
+            }
+            queue.offerLast(nums[i + k - 1]);
+            res[i] = queue.peekFirst();
+            if (queue.peekFirst() == nums[i]) {
+                queue.pollFirst();
             }
         }
 
-        int[] arr = new int[res.size()];
-        for (int i = 0; i < res.size(); i++) {
-            arr[i] = res.get(i);
-        }
-        return arr;
+        return res;
     }
 
-    static class MonotonicQueue {
-        // A decrease queue
-        LinkedList<Integer> maxq = new LinkedList<>();
-
-        public void push(int n) {
-            // Delete tail elements until the element greater than n
-            while (!maxq.isEmpty() && maxq.getLast() < n) {
-                maxq.pollLast();
-            }
-            // Add n to the tail
-            maxq.addLast(n);
-        }
-
-        public int max() {
-            return maxq.getFirst();
-        }
-
-        public void pop(int n) {
-            if (n == maxq.getFirst()) {
-                maxq.pollFirst();
-            }
-        }
-    }
 
     // Use a heap to maintain the maximum element in slide window
     // Delete only when the top element is not in the window

@@ -7,11 +7,11 @@ import java.util.Map;
 
 /*
     Description:
-    There is an array and we can choose numbers from it
+    There is an array, and we can choose numbers from it
     If we choose nums[i], we cannot choose nums[i-1] and nums[i+1]
     Find the maximum sum of the numbers chosen
  */
-public class Citadel1ProcessExecution {
+public class CitadelProcessExecution {
 
     public static long getMaximumPower(List<Integer> power) {
         Map<Integer, Integer> freq = new HashMap<>();
