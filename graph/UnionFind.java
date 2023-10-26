@@ -3,6 +3,7 @@ package graph;
 // A template for union-find set
 public class UnionFind {
     int[] parent;
+    int count;
 
     public UnionFind(int n) {
         parent = new int[n];
@@ -11,11 +12,12 @@ public class UnionFind {
         }
     }
 
-    public int find(int i) {
-        if (parent[i] == i) {
-            return i;
+    // Path compression, O(1) time complexity
+    public int find(int x) {
+        if (parent[x] == x) {
+            return x;
         }
-        return parent[i] = find(parent[i]);
+        return parent[x] = find(parent[x]);
     }
 
     public void union(int p, int q) {
@@ -24,5 +26,9 @@ public class UnionFind {
 
     public boolean isConnected(int p, int q) {
         return find(q) == find(p);
+    }
+
+    public int getCount() {
+        return count;
     }
 }
