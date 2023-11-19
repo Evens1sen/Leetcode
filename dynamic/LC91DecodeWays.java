@@ -6,7 +6,7 @@ import java.util.Map;
 public class LC91DecodeWays {
 
     public static void main(String[] args) {
-        String s = "226";
+        String s = "12";
         System.out.println(numDecodings(s));
     }
 
@@ -18,23 +18,26 @@ public class LC91DecodeWays {
 
     public static int dpSolution(String s) {
         int n = s.length();
-        int[] dp = new int[n + 1]; // dp[i]: decoding ways for s[i:]
-        dp[n] = 1;
-        dp[n - 1] = (s.charAt(n - 1) == '0' ? 0 : 1);
-        for (int i = n - 2; i >= 0; i--) {
-            char first = s.charAt(i);
-            char second = s.charAt(i + 1);
-            if (first != '0') {
-                dp[i] += dp[i + 1];
+        int[] dp = new int[n + 1];
+        dp[0] = 1;
+
+        for (int i = 1; i <= n; i++) {
+            if (s.charAt(i - 1) != '0') {
+                dp[i] += dp[i - 1];
             }
 
-            if (first == '1' || (first == '2' && '0' <= second && second <= '6')) {
-                dp[i] += dp[i + 2];
+            if (i >= 2) {
+                int value = Integer.parseInt(s.substring(i - 2, i));
+                if (10 <= value && value <= 26) {
+                    dp[i] += dp[i - 2];
+                }
             }
+
         }
 
-        return dp[0];
+        return dp[n];
     }
+
 
     public static int memoSolution(String s) {
         if (s.charAt(0) == '0') {
