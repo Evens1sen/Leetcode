@@ -3,9 +3,8 @@ package greedy;
 public class LC134GasStation {
 
     public static void main(String[] args) {
-        int[] gas = {1, 2, 3, 4, 5};
-        int[] cost = {3, 4, 5, 1, 2};
-        System.out.println(canCompleteCircuit(gas, cost));
+        int[] gas = {2, 3, 4};
+        int[] cost = {3, 4, 3};
     }
 
     public static int canCompleteCircuit(int[] gas, int[] cost) {
@@ -18,18 +17,20 @@ public class LC134GasStation {
             }
         }
 
-        int tank = gas[position];
+        int tank = 0;
         int i = position;
-        while (tank > 0) {
-            if (tank < cost[i]) {
+        while ((i + 1) % n != position) {
+            tank += gas[i];
+            tank -= cost[i];
+            if (tank < 0) {
                 return -1;
             }
-            tank = tank - cost[i] + gas[(i + 1) % n];
             i = (i + 1) % n;
-            if (i == position) {
-                break;
-            }
         }
+        if (tank < cost[i]) {
+            return -1;
+        }
+
         return position;
     }
 }
