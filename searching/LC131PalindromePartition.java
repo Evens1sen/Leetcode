@@ -5,43 +5,66 @@ import java.util.List;
 
 public class LC131PalindromePartition {
 
-    List<List<String>> res = new ArrayList<>();
+    public static void main(String[] args) {
+        String s = "abbab";
+        System.out.println(partition(s));
+    }
 
-    boolean[][] isPalindromeSubstring;
+    static List<List<String>> res = new ArrayList<>();
 
-    public List<List<String>> partition(String s) {
-        isPalindromeSubstring = new boolean[s.length()][s.length()];
+    static boolean[][] isPalindrome;
+
+    public static List<List<String>> partition(String s) {
+        isPalindrome = new boolean[s.length()][s.length()];
 
         // Set left down part of the matrix to false
         for (int i = 0; i < s.length(); i++) {
             for (int j = 0; j < s.length(); j++) {
                 if (i >= j) {
-                    isPalindromeSubstring[i][j] = true;
+                    isPalindrome[i][j] = true;
                 }
             }
         }
 
         // Since dp[i][j] depends on dp[i+1][j-1], iterate from down to up and left to right
         for (int i = s.length() - 2; i >= 0; i--) {
-            for (int j = i; j < s.length(); j++) {
-                if (i < j) {
-                    isPalindromeSubstring[i][j] = isPalindromeSubstring[i + 1][j - 1] && (s.charAt(i) == s.charAt(j));
-                }
+            for (int j = i + 1; j < s.length(); j++) {
+                isPalindrome[i][j] = isPalindrome[i + 1][j - 1] && (s.charAt(i) == s.charAt(j));
             }
         }
 
-        backtracking(s, 0, new ArrayList<>());
+        return backtracking(s, 0);
+//        return res;
+    }
+
+    public static List<List<String>> backtracking(String s, int index) {
+        List<List<String>> res = new ArrayList<>();
+        if (s.length() == index) {
+            res.add(new ArrayList<>());
+            return res;
+        }
+
+        for (int i = index; i < s.length(); i++) {
+            if (isPalindrome[index][i]) {
+                String first = s.substring(index, i + 1);
+                List<List<String>> last = backtracking(s, i + 1);
+                for (List<String> lst : last) {
+                    lst.add(0, first);
+                }
+                res.addAll(last);
+            }
+        }
         return res;
     }
 
-    public void backtracking(String s, int index, List<String> path) {
+    public static void backtracking(String s, int index, List<String> path) {
         if (index == s.length()) {
             res.add(new ArrayList<>(path));
             return;
         }
 
         for (int i = index; i < s.length(); i++) {
-            if (isPalindromeSubstring[index][i]) {
+            if (isPalindrome[index][i]) {
                 path.add(s.substring(index, i + 1));
                 backtracking(s, i + 1, path);
                 path.remove(path.size() - 1);
@@ -51,7 +74,7 @@ public class LC131PalindromePartition {
 
 
     // The check() to examine the palindrome substring can be optimized by DP
-    public boolean check(String s, int i, int j) {
+    public static boolean check(String s, int i, int j) {
         while (i < j) {
             if (s.charAt(i) != s.charAt(j)) {
                 return false;

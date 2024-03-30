@@ -5,8 +5,8 @@ import java.util.*;
 public class LC239SlidingWindowMaximum {
 
     public static void main(String[] args) {
-        int[] nums = {7, 2, 4};
-        int k = 2;
+        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
+        int k = 3;
         System.out.println(Arrays.toString(maxSlidingWindow(nums, k)));
     }
 
@@ -15,30 +15,28 @@ public class LC239SlidingWindowMaximum {
     }
 
     public static int[] dequeSolution(int[] nums, int k) {
-        int n = nums.length;
         Deque<Integer> queue = new LinkedList<>();
         for (int i = 0; i < k; i++) {
-            while (!queue.isEmpty() && queue.peekLast() < nums[i]) {
+            while (!queue.isEmpty() && nums[queue.peekLast()] <= nums[i]) {
                 queue.pollLast();
             }
-            queue.offerLast(nums[i]);
+            queue.offerLast(i);
         }
 
-        int[] res = new int[n - k + 1];
-        res[0] = queue.peekFirst();
-        if (queue.peekFirst() == nums[0]) {
-            queue.pollFirst();
-        }
+        int[] res = new int[nums.length - k + 1];
+        res[0] = nums[queue.peekFirst()];
 
-        for (int i = 1; i <= nums.length - k; i++) {
-            while (!queue.isEmpty() && queue.peekLast() < nums[i + k - 1]) {
+        for (int i = 1; i < nums.length - k + 1; i++) {
+            while (!queue.isEmpty() && nums[queue.peekLast()] <= nums[i + k - 1]) {
                 queue.pollLast();
             }
-            queue.offerLast(nums[i + k - 1]);
-            res[i] = queue.peekFirst();
-            if (queue.peekFirst() == nums[i]) {
+            queue.offerLast(i + k - 1);
+
+            while (!queue.isEmpty() && queue.peekFirst() < i) {
                 queue.pollFirst();
             }
+
+            res[i] = nums[queue.peekFirst()];
         }
 
         return res;

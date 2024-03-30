@@ -5,9 +5,9 @@ public class Heap {
     int size;
     int[] heap;
 
-    public Heap(int size) {
-        this.size = size;
-        heap = new int[size + 1];
+    public Heap(int N) {
+        this.size = 0;
+        heap = new int[N + 1];
     }
 
     public void insert(int val) {

@@ -6,7 +6,7 @@ import java.util.Random;
 public class LC215FindKthLargest {
 
     public static void main(String[] args) {
-        int[] nums = {1, 5, 2, 6, 3};
+        int[] nums = {3, 2, 1, 5, 6, 4};
         int k = 4;
         System.out.println(findKthLargest(nums, k));
     }
@@ -28,7 +28,7 @@ public class LC215FindKthLargest {
     }
 
     public static int quickSelect(int[] nums, int left, int right, int index) {
-        int partitionIndex = randomPartition(nums, left, right);
+        int partitionIndex = receptivePartition(nums, left, right);
         if (partitionIndex == index) {
             return nums[partitionIndex];
         } else if (partitionIndex < index) {
@@ -74,6 +74,23 @@ public class LC215FindKthLargest {
         swap(nums, i, right);
         return i;
     }
+
+    public static int receptivePartition(int[] nums, int left, int right) {
+        int pivot = nums[right];
+        int i = left, j = right;
+        for (int k = left; k < right; k++) {
+            if (nums[k] < pivot) {
+                swap(nums, i, k);
+                i++;
+            } else if (nums[k] > pivot) {
+                swap(nums, j, k);
+                j--;
+            }
+        }
+        nums[i] = pivot;
+        return i;
+    }
+
 
     public static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
